@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import {moderateScale} from "react-native-size-matters";
+import {moderateScale} from 'react-native-size-matters';
 
 const OnBoardingNextButton = ({onPress, numPages, currentPage})=>{
 
-  const [iconState, setIconState] = useState("arrowright");
+  const [iconState, setIconState] = useState('arrowright');
 
   // TODO: Refactor logic later....
   const handlePress = () => {
-    if(currentPage + 2 === numPages){
-      if(iconState !== "check")
-        setIconState("check");
+    if (currentPage + 2 === numPages){
+      if (iconState !== 'check')
+        {setIconState('check');}
     }
 
     onPress();
@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
   container: {
     width: moderateScale(50),
     height: moderateScale(50),
-    borderRadius: moderateScale(50)/2,
+    borderRadius: moderateScale(50) / 2,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "#106BA3"
+    backgroundColor: '#106BA3',
   },
 });
 

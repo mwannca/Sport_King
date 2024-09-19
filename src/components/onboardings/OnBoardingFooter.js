@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import Dots from "./Dots";
-import Dot from "./Dot";
-import {moderateScale} from "react-native-size-matters";
-import OnBoardingNextButton from "./OnBoardingNextButton";
+import Dots from './Dots';
+import Dot from './Dot';
+import {moderateScale} from 'react-native-size-matters';
+import OnBoardingNextButton from './OnBoardingNextButton';
 
 const OnBoardingFooter = ({currentPage, numPages, onPress})=>{
 
@@ -18,11 +18,11 @@ const OnBoardingFooter = ({currentPage, numPages, onPress})=>{
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    flexDirection: "row",
-    position: "absolute",
+    width: '100%',
+    flexDirection: 'row',
+    position: 'absolute',
     justifyContent: 'space-between',
-    bottom: moderateScale(15)
+    bottom: moderateScale(15),
   },
 });
 

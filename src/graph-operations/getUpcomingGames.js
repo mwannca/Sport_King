@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const GET_UPCOMING_GAMES = gql`
   query upcomingGames($jsWebToken: String!, $data: UpCommingGameInput! ) {

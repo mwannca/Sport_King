@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {
-    jsWebToken: "",
-    id: "",
-    name: "",
+    jsWebToken: '',
+    id: '',
+    name: '',
     coins: 0,
     bet_won: 0,
     bet_lost: 0,
     bet_pending: 0,
     position: 0,
-    invite_code: "",
+    invite_code: '',
     appReviewLastTime: 0,
-    totalBetCount: 0
+    totalBetCount: 0,
   },
   reducers: {
     initUser:  (state, action) => {
@@ -30,32 +30,32 @@ export const userSlice = createSlice({
     addCoins: (state, action) => {
       console.log({
         ...state,
-        coins: state.coins + action.payload.coins
-      }, action)
+        coins: state.coins + action.payload.coins,
+      }, action);
       return {
         ...state,
-        coins: state.coins + action.payload.coins
-      }
-    }
-  }
+        coins: state.coins + action.payload.coins,
+      };
+    },
+  },
 });
 
 export const initUserPersit = (payload) => async (dispatch) => {
-  await AsyncStorage.setItem("jsWebToken", payload.jsWebToken);
-  dispatch(initUser(payload))
-}
+  await AsyncStorage.setItem('jsWebToken', payload.jsWebToken);
+  dispatch(initUser(payload));
+};
 
 export const persistAppReviewLastTime = (payload) => async (dispatch) => {
-  console.log("app Review last time =====", payload.appReviewLastTime)
-  await AsyncStorage.setItem("appReviewLastTime", payload.appReviewLastTime.toString());
-  dispatch(saveAppReviewTime(payload))
-}
+  console.log('app Review last time =====', payload.appReviewLastTime);
+  await AsyncStorage.setItem('appReviewLastTime', payload.appReviewLastTime.toString());
+  dispatch(saveAppReviewTime(payload));
+};
 
 export const increaseTotalBetCountPersist = (payload) => async (dispatch) => {
-  console.log("total bet jump", payload.totalBetCount)
-  await AsyncStorage.setItem("totalBetCount", payload.totalBetCount.toString());
-  dispatch(increaseTotalBetCount(payload))
-}
+  console.log('total bet jump', payload.totalBetCount);
+  await AsyncStorage.setItem('totalBetCount', payload.totalBetCount.toString());
+  dispatch(increaseTotalBetCount(payload));
+};
 
 export const { initUser, addCoins, saveAppReviewTime, increaseTotalBetCount } = userSlice.actions;
 

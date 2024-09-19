@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 import {View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity} from 'react-native';
-import { moderateScale } from "react-native-size-matters";
+import { moderateScale } from 'react-native-size-matters';
 
-import CupMain from "../assets/cup_main.png";
+import CupMain from '../assets/cup_main.png';
 import ChampionsBackground from '../assets/champions_background.jpg';
-import LinearGradient from "react-native-linear-gradient";
+import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSelector} from 'react-redux';
 
@@ -23,25 +23,25 @@ const HomeInfoBox = () => {
         <Text adjustsFontSizeToFit={true} numberOfLines={1} style={styles.text}>{user.name}</Text>
       </ImageBackground>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   text: {
     fontSize: moderateScale(24),
-    color: "#fff",
-    fontWeight: "bold",
-    marginTop: moderateScale(10)
+    color: '#fff',
+    fontWeight: 'bold',
+    marginTop: moderateScale(10),
   },
   imageBackground: {
-    resizeMode: "cover",
-    justifyContent: "center",
-    width: "100%",
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    width: '100%',
     height: moderateScale(175),
-    alignItems: "center",
+    alignItems: 'center',
   },
   linearGradient: {
     position: 'absolute',
@@ -49,46 +49,46 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: moderateScale(220),
-    opacity: 0.75
+    opacity: 0.75,
   },
 
   containerButton: {
     position: 'absolute',
     left: moderateScale(0),
     top: moderateScale(5),
-    backgroundColor: "#140A35",
+    backgroundColor: '#140A35',
     borderRadius: moderateScale(5),
     height: moderateScale(30),
     width: moderateScale(150),
     marginHorizontal: moderateScale(10),
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   cartContainer: {
-    width: "30%",
-    height: "100%",
-    backgroundColor: "blue",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '30%',
+    height: '100%',
+    backgroundColor: 'blue',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderBottomLeftRadius: moderateScale(5),
-    borderTopLeftRadius: moderateScale(5)
+    borderTopLeftRadius: moderateScale(5),
   },
   imageStyle: {
     width: moderateScale(20),
     height: moderateScale(20),
-    resizeMode: "contain",
-    marginRight: moderateScale(5)
+    resizeMode: 'contain',
+    marginRight: moderateScale(5),
   },
   textStyle: {
-    color: "#fff",
+    color: '#fff',
     fontSize: moderateScale(14),
-    fontFamily: "OpenSans-Bold"
+    fontFamily: 'OpenSans-Bold',
   },
   coinCountContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginHorizontal: moderateScale(10),
-    justifyContent: "center",
-    alignItems: "center"
-  }
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default HomeInfoBox;

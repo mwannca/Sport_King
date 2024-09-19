@@ -3,22 +3,22 @@ import EventsScreen from '../screens/EventsScreen';
 import LeagueListScreen from '../screens/LeagueListScreen';
 import BetCardListScreen from '../screens/BetCardListScreen';
 import React from 'react';
-import { moderateScale } from "react-native-size-matters";
+import { moderateScale } from 'react-native-size-matters';
 
 export const MatchScreen = () => {
   const Stack = createNativeStackNavigator();
 
   return (
     <Stack.Navigator
-      initialRouteName={"MatchsStack"}
+      initialRouteName={'MatchsStack'}
       screenOptions={{
         headerTitleStyle: {
-          color: "#ffffff"
+          color: '#ffffff',
         },
         headerStyle: {
-          backgroundColor: "#1C0C4F",
-          paddingRight: moderateScale(-200)
-        }
+          backgroundColor: '#1C0C4F',
+          paddingRight: moderateScale(-200),
+        },
       }}
     >
       <Stack.Screen
@@ -29,5 +29,5 @@ export const MatchScreen = () => {
       <Stack.Screen name="Leagues" component={LeagueListScreen} />
       <Stack.Screen name="GamesList" component={BetCardListScreen} options={{title: 'Games'}} />
     </Stack.Navigator>
-  )
+  );
 };

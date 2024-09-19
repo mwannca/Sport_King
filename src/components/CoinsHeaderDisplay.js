@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
 import {
   View,
@@ -7,20 +7,20 @@ import {
   TouchableOpacity,
   Image,
   Button, ActivityIndicator,
-  Platform
+  Platform,
 } from 'react-native';
-import { moderateScale } from "react-native-size-matters";
+import { moderateScale } from 'react-native-size-matters';
 import {initUser, addCoins } from '../redux/features/userSlice';
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import Betcoin from "../assets/betcoin.png";
-import { useSelector, useDispatch } from 'react-redux'
-import { useMutation } from "@apollo/client";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Betcoin from '../assets/betcoin.png';
+import { useSelector, useDispatch } from 'react-redux';
+import { useMutation } from '@apollo/client';
 import {ADD_COINS} from '../graph-operations';
-import analytics from "@react-native-firebase/analytics";
+import analytics from '@react-native-firebase/analytics';
 import {RewardedAd, AdEventType, TestIds, RewardedAdEventType } from 'react-native-google-mobile-ads';
-import AdsModal from "./AdsModal";
+import AdsModal from './AdsModal';
 
-const adUnitId = Platform.OS === "ios"?  "ca-app-pub-4856517983898537/6949691507" : "ca-app-pub-4856517983898537/1049974470"
+const adUnitId = Platform.OS === 'ios' ?  'ca-app-pub-4856517983898537/6949691507' : 'ca-app-pub-4856517983898537/1049974470';
 
 
 // TODO: Fix error for rewarded ads when mot available
@@ -31,7 +31,7 @@ const CoinsHeaderDisplay = () => {
   const [modal, setModal] = useState({
     isMainModalVisible: false,
     isLoadingRewardedAdsModalVisible: false,
-    isModalErrorVisible: false
+    isModalErrorVisible: false,
   });
 
   const [loaded, setLoaded] = useState(false);
@@ -39,7 +39,7 @@ const CoinsHeaderDisplay = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [isModalErrorVisible, setModalErrorVisible] = useState(false);
   const [rewardEarned, setRewardsEarned] = useState({ status: false, amount: 0});
-  const [appReviewLaunched, setAppReviewingLaunched] = useState(false)
+  const [appReviewLaunched, setAppReviewingLaunched] = useState(false);
 
   useEffect(() => {
 
@@ -47,18 +47,18 @@ const CoinsHeaderDisplay = () => {
 
   const [sendCoins] = useMutation(ADD_COINS, {
     onCompleted(data){
-      console.log("Add coins complete : ", data);
+      console.log('Add coins complete : ', data);
       setRewardsEarned({ amount: 0, status: false });
     },
     onError(error){
-      console.log("Error ", error);
-    }
+      console.log('Error ', error);
+    },
   });
 
 
   const toggleModal = async () => {
     await analytics().logEvent('click_on_add_coin');
-    setModal({...modal, isMainModalVisible: !modal.isMainModalVisible})
+    setModal({...modal, isMainModalVisible: !modal.isMainModalVisible});
   };
 
   const showAds = async () => {
@@ -70,8 +70,8 @@ const CoinsHeaderDisplay = () => {
     });
 
     const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
-      console.log("LOADED")
-      rewarded.show()
+      console.log('LOADED');
+      rewarded.show();
     });
 
     const unsubscribeEarned = rewarded.addAdEventListener(
@@ -81,30 +81,30 @@ const CoinsHeaderDisplay = () => {
         sendCoins({
           variables: {
             jsWebToken: user.jsWebToken,
-            amount: reward.amount
-          }
+            amount: reward.amount,
+          },
         });
         dispatch(addCoins({
-          coins: reward.amount
+          coins: reward.amount,
         }));
       },
     );
 
     const unsubscribedClosed = rewarded.addAdEventListener(AdEventType.CLOSED, (error) => {
-      console.log("should close all modal")
-      setModal({...modal, isLoadingRewardedAdsModalVisible: false, isMainModalVisible: false , isModalErrorVisible: false})
-    })
+      console.log('should close all modal');
+      setModal({...modal, isLoadingRewardedAdsModalVisible: false, isMainModalVisible: false , isModalErrorVisible: false});
+    });
 
     const unsubscribedError = rewarded.addAdEventListener(AdEventType.ERROR, (error) => {
       console.log('Ad failed to load with error: ', error);
-      console.log("should open modal error")
-      setModal({...modal, isModalErrorVisible: true, isLoadingRewardedAdsModalVisible: false, isMainModalVisible: false})
-    })
+      console.log('should open modal error');
+      setModal({...modal, isModalErrorVisible: true, isLoadingRewardedAdsModalVisible: false, isMainModalVisible: false});
+    });
 
     rewarded.load();
-    console.log("after main load")
+    console.log('after main load');
 
-    setModal({...modal, isMainModalVisible: false, isLoadingRewardedAdsModalVisible: true, isModalErrorVisible: false})
+    setModal({...modal, isMainModalVisible: false, isLoadingRewardedAdsModalVisible: true, isModalErrorVisible: false});
   };
 
   return (
@@ -121,71 +121,71 @@ const CoinsHeaderDisplay = () => {
         onBackButtonPress={() => setModal({...modal, isMainModalVisible: false})}
         onBackdropPress={() => setModal({...modal, isMainModalVisible: false})}
       >
-        {modal.isModalErrorVisible && <AdsModal title={"Error"} close={() => setModal({...modal, isModalErrorVisible: false})} buttonText={"Ok"} text={"No ads available for now, please try again later"} onPress={() => setModal({...modal, isMainModalVisible: false, isModalErrorVisible: false})} />}
+        {modal.isModalErrorVisible && <AdsModal title={'Error'} close={() => setModal({...modal, isModalErrorVisible: false})} buttonText={'Ok'} text={'No ads available for now, please try again later'} onPress={() => setModal({...modal, isMainModalVisible: false, isModalErrorVisible: false})} />}
 
-        {modal.isMainModalVisible && <AdsModal title={"Watch an Ads"} close={() => setModal({...modal, isMainModalVisible: false})} buttonText={"Watch Ads"} text={"Do you want to add more coins to your account? It's Free ! Just watch an ads an receive more coins !"} onPress={showAds} />}
+        {modal.isMainModalVisible && <AdsModal title={'Watch an Ads'} close={() => setModal({...modal, isMainModalVisible: false})} buttonText={'Watch Ads'} text={"Do you want to add more coins to your account? It's Free ! Just watch an ads an receive more coins !"} onPress={showAds} />}
 
         {modal.isLoadingRewardedAdsModalVisible &&
-          <View style={{ flex: 1, alignItems: "center", justifyContent: "center"}}>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <ActivityIndicator size="large" color="#fff"/>
           </View> }
       </Modal>
     </TouchableOpacity>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#140A35",
+    backgroundColor: '#140A35',
     borderRadius: moderateScale(5),
     height: moderateScale(30),
     marginLeft: moderateScale(0),
     marginRight: moderateScale(-30),
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   cartContainer: {
-    width: "30%",
-    height: "100%",
-    backgroundColor: "blue",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '30%',
+    height: '100%',
+    backgroundColor: 'blue',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderBottomLeftRadius: moderateScale(5),
-    borderTopLeftRadius: moderateScale(5)
+    borderTopLeftRadius: moderateScale(5),
   },
   imageStyle: {
     width: moderateScale(20),
     height: moderateScale(20),
-    resizeMode: "contain",
-    marginRight: moderateScale(5)
+    resizeMode: 'contain',
+    marginRight: moderateScale(5),
   },
   textStyle: {
-    color: "#fff",
+    color: '#fff',
     fontSize: moderateScale(15),
-    fontFamily: "OpenSans-Bold"
+    fontFamily: 'OpenSans-Bold',
   },
   coinCountContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginHorizontal: moderateScale(10),
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modal:{
     flex: 1,
-    position: "absolute",
-    backgroundColor: "#fff",
+    position: 'absolute',
+    backgroundColor: '#fff',
     width: moderateScale(300),
     height: moderateScale(125),
     padding: moderateScale(15),
     left: moderateScale(22.5),
     borderRadius: moderateScale(5),
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalText: {
-    fontFamily: "OpenSans-Bold",
+    fontFamily: 'OpenSans-Bold',
     fontSize: moderateScale(12),
-    textAlign: "center",
-    marginBottom: moderateScale(10)
+    textAlign: 'center',
+    marginBottom: moderateScale(10),
   },
 });
 

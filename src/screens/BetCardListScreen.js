@@ -6,16 +6,16 @@ import {
   ScrollView,
   Image, FlatList, ActivityIndicator,
 } from 'react-native';
-import BetCardSingle from "../components/BetCardSingle";
-import { moderateScale } from "react-native-size-matters"
-import spain from "../assets/spain.png";
+import BetCardSingle from '../components/BetCardSingle';
+import { moderateScale } from 'react-native-size-matters';
+import spain from '../assets/spain.png';
 import {useQuery} from '@apollo/client';
 import { GET_MATCH_BASIC_INFO } from '../graph-operations';
 import {useSelector} from 'react-redux';
 import QuickPicksModal from '../components/QuickPicksModal';
 import {truncate} from '../utils';
 import NetInfo from '@react-native-community/netinfo';
-import analytics from "@react-native-firebase/analytics";
+import analytics from '@react-native-firebase/analytics';
 
 
 const BetCardListScreen  = ({ route, navigation }) => {
@@ -29,7 +29,7 @@ const BetCardListScreen  = ({ route, navigation }) => {
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
-      console.log("Connection type", state);
+      console.log('Connection type', state);
       setIsConnected(state.isConnected);
     });
 
@@ -47,23 +47,23 @@ const BetCardListScreen  = ({ route, navigation }) => {
       matchId: matchIDs,
     },
     onCompleted(data){
-      console.log("m basic info ", data);
+      console.log('m basic info ', data);
       setGameDetails(data.matchBasicInfo);
-    }
+    },
   });
 
   const handleCloseModal = (navigate) => {
     closeModal();
-    if(navigate) navigation.navigate("Bet");
+    if (navigate) {navigation.navigate('Bet');}
   };
 
   const handleSelection = async (info, item) => {
     setIsQuickPicksVisible(true);
-    console.log("itemes1 ", item);
-    console.log("itemes2 ", info);
+    console.log('itemes1 ', item);
+    console.log('itemes2 ', info);
     const details = { ...info, ...item, sport};
 
-    console.log("detals", details);
+    console.log('detals', details);
     setQuickPicksDetails(details);
 
     await analytics().logEvent('click_on_odds');
@@ -76,18 +76,18 @@ const BetCardListScreen  = ({ route, navigation }) => {
   };
 
   const renderCards = ({ item }) => {
-    console.log("item ", item);
+    console.log('item ', item);
     return (
-        <BetCardSingle onOddSelected={(info) => handleSelection(info, item)} {...item} sport={sport} onPress={() => navigation.navigate("GameDetails", {...item, country, leagueName, name, sport, matchId: item.matchId })}/>
-    )
+        <BetCardSingle onOddSelected={(info) => handleSelection(info, item)} {...item} sport={sport} onPress={() => navigation.navigate('GameDetails', {...item, country, leagueName, name, sport, matchId: item.matchId })}/>
+    );
   };
 
-  if(loading){
+  if (loading){
     return (
-        <View style={{ backgroundColor: "#1C0C4F", flex: 1, alignItems: "center", justifyContent: "center"}}>
+        <View style={{ backgroundColor: '#1C0C4F', flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <ActivityIndicator size="large" color="#fff"/>
         </View>
-    )
+    );
   }
 
   const correctName = leagueName ? leagueName : name;
@@ -95,7 +95,7 @@ const BetCardListScreen  = ({ route, navigation }) => {
   return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text style={styles.text}>{truncate(country + ", " + correctName, 25)}</Text>
+          <Text style={styles.text}>{truncate(country + ', ' + correctName, 25)}</Text>
         </View>
         <View style={[styles.container, { padding: moderateScale(5)}]}>
           <FlatList
@@ -115,33 +115,33 @@ const BetCardListScreen  = ({ route, navigation }) => {
         /> */}
         { isQuickPickVisible && <QuickPicksModal info={quickPicksDetails} close={(navigate) => handleCloseModal(navigate)} /> }
       </View>
-  )
+  );
 };
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1C0C4F",
+    backgroundColor: '#1C0C4F',
   },
   sportImageStyle: {
     width: moderateScale(16),
     height: moderateScale(16),
-    resizeMode: "contain",
-    marginRight: moderateScale(10)
+    resizeMode: 'contain',
+    marginRight: moderateScale(10),
   },
   text: {
-    color: "#fff",
-    fontFamily: "OpenSans-Bold",
-    fontSize: moderateScale(16)
+    color: '#fff',
+    fontFamily: 'OpenSans-Bold',
+    fontSize: moderateScale(16),
   },
   headerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#140A35",
-    padding: moderateScale(5)
-  }
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#140A35',
+    padding: moderateScale(5),
+  },
 });
 
 export default BetCardListScreen;

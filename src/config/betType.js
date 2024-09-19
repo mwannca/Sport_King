@@ -1,12 +1,12 @@
 export const betType = (type) => {
   switch (type) {
-    case "1x2":
+    case '1x2':
       return 1;
-    case "Handicap":
+    case 'Handicap':
       return 2;
-    case "Handicap Half":
+    case 'Handicap Half':
       return 3;
-    case "Total":
+    case 'Total':
       return 4;
     default:
       return 0;

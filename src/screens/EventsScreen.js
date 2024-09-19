@@ -5,13 +5,13 @@ import {
   StyleSheet,
   ScrollView, ActivityIndicator,
 } from 'react-native';
-import EventListSingle from "../components/EventListSingle";
-import BallIcon from "../assets/soccer_icon.png";
-import BasketBall from "../assets/basketball_icon.png";
-import { moderateScale } from "react-native-size-matters";
+import EventListSingle from '../components/EventListSingle';
+import BallIcon from '../assets/soccer_icon.png';
+import BasketBall from '../assets/basketball_icon.png';
+import { moderateScale } from 'react-native-size-matters';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import NetInfo from '@react-native-community/netinfo';
-import analytics from "@react-native-firebase/analytics";
+import analytics from '@react-native-firebase/analytics';
 
 const EventsScreen = ({ navigation, route }) => {
 
@@ -19,7 +19,7 @@ const EventsScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
-      console.log("Connection type", state);
+      console.log('Connection type', state);
       setIsConnected(state.isConnected);
     });
 
@@ -29,13 +29,13 @@ const EventsScreen = ({ navigation, route }) => {
 
   const onPress = async () => {
     await analytics().logEvent('click_on_football_event');
-    navigation.navigate("Leagues", { sport: "football" })
-  }
+    navigation.navigate('Leagues', { sport: 'football' });
+  };
 
   return (
       <View style={styles.container}>
         <ScrollView>
-          <EventListSingle request={true} onPress={() => navigation.navigate("Leagues", { sport: "football" })} text={"FOOTBALL"} icon={BallIcon}/>
+          <EventListSingle request={true} onPress={() => navigation.navigate('Leagues', { sport: 'football' })} text={'FOOTBALL'} icon={BallIcon}/>
           {/*<EventListSingle request={true} onPress={() => navigation.navigate("Leagues", { sport: "basketball", liveScore })} text={"BASKETBALL"} icon={BasketBall} />*/}
         </ScrollView>
         {/* isConnected &&
@@ -48,15 +48,15 @@ const EventsScreen = ({ navigation, route }) => {
             }}
         /> */}
       </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1C0C4F",
-    padding: moderateScale(5)
-  }
+    backgroundColor: '#1C0C4F',
+    padding: moderateScale(5),
+  },
 });
 
 export default EventsScreen;

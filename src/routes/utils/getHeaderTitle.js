@@ -15,8 +15,8 @@ export function getHeaderTitle(route) {
     case 'Bet':
       return 'Bet';
     case 'Leaderboards':
-      return "Leaderboards";
+      return 'Leaderboards';
     case 'Profile':
-      return "Profile"
+      return 'Profile';
   }
 }

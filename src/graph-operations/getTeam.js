@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const GET_TEAM = gql`
   query getTeam($jsWebToken: String!, $sport: String!, $teamId: String!) {

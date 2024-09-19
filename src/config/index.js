@@ -1,2 +1,2 @@
-export * from "./gameType";
-export * from "./betType";
+export * from './gameType';
+export * from './betType';

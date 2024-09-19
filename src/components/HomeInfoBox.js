@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import {View, Text, StyleSheet, Image, ImageBackground} from 'react-native';
-import { moderateScale } from "react-native-size-matters";
+import { moderateScale } from 'react-native-size-matters';
 
-import CupMain from "../assets/cup_main.png";
-import StatWon from "../assets/stats_won.png";
-import StatLost from "../assets/stats_lost.png";
-import StatInPlay from "../assets/stats_in_play.png";
-import StatPosition from "../assets/stats_rank.png";
+import CupMain from '../assets/cup_main.png';
+import StatWon from '../assets/stats_won.png';
+import StatLost from '../assets/stats_lost.png';
+import StatInPlay from '../assets/stats_in_play.png';
+import StatPosition from '../assets/stats_rank.png';
 import ChampionsBackground from '../assets/champions_background.jpg';
-import LinearGradient from "react-native-linear-gradient";
+import LinearGradient from 'react-native-linear-gradient';
 import { useSelector } from 'react-redux';
 
 
@@ -25,50 +25,50 @@ const HomeInfoBox = () => {
         <Image style={{ width: moderateScale(80), height: moderateScale(80)}} source={CupMain}/>
         <Text style={styles.text}>{user.name}</Text>
         <View style={styles.statsHolder}>
-          <View style={{ alignItems: "center"}}>
+          <View style={{ alignItems: 'center'}}>
             <Image style={{ width: moderateScale(30), height: moderateScale(30)}} source={StatWon}/>
-            <Text style={{ fontSize: moderateScale(14), color: "#fff", fontWeight: "bold"}}><Text style={{ color: "#FDE88E"}}>Won:</Text> {user.bet_won}</Text>
+            <Text style={{ fontSize: moderateScale(14), color: '#fff', fontWeight: 'bold'}}><Text style={{ color: '#FDE88E'}}>Won:</Text> {user.bet_won}</Text>
           </View>
-          <View style={{ alignItems: "center"}}>
+          <View style={{ alignItems: 'center'}}>
             <Image style={{ width: moderateScale(30), height: moderateScale(30)}} source={StatLost}/>
-            <Text style={{ fontSize: moderateScale(14), color: "#fff", fontWeight: "bold"}}><Text style={{ color: "#FDE88E"}}>Lost:</Text> {user.bet_lost}</Text>
+            <Text style={{ fontSize: moderateScale(14), color: '#fff', fontWeight: 'bold'}}><Text style={{ color: '#FDE88E'}}>Lost:</Text> {user.bet_lost}</Text>
           </View>
-          <View style={{ alignItems: "center"}}>
+          <View style={{ alignItems: 'center'}}>
             <Image style={{ width: moderateScale(30), height: moderateScale(30)}} source={StatInPlay}/>
-            <Text style={{ fontSize: moderateScale(14), color: "#fff", fontWeight: "bold"}}><Text style={{ color: "#FDE88E"}}>Pending:</Text> {user.bet_pending}</Text>
+            <Text style={{ fontSize: moderateScale(14), color: '#fff', fontWeight: 'bold'}}><Text style={{ color: '#FDE88E'}}>Pending:</Text> {user.bet_pending}</Text>
           </View>
-          <View style={{ alignItems: "center"}}>
+          <View style={{ alignItems: 'center'}}>
             <Image style={{ width: moderateScale(30), height: moderateScale(30)}} source={StatPosition}/>
-            <Text style={{ fontSize: moderateScale(14), color: "#fff", fontWeight: "bold"}}><Text style={{ color: "#FDE88E"}}>Ranking:</Text> {user.position}</Text>
+            <Text style={{ fontSize: moderateScale(14), color: '#fff', fontWeight: 'bold'}}><Text style={{ color: '#FDE88E'}}>Ranking:</Text> {user.position}</Text>
           </View>
         </View>
       </ImageBackground>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   text: {
     fontSize: moderateScale(24),
-    color: "#fff",
-    fontWeight: "bold",
-    marginTop: moderateScale(10)
+    color: '#fff',
+    fontWeight: 'bold',
+    marginTop: moderateScale(10),
   },
   statsHolder: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-    paddingVertical: moderateScale(15)
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    paddingVertical: moderateScale(15),
   },
   imageBackground: {
-    resizeMode: "cover",
-    justifyContent: "center",
+    resizeMode: 'cover',
+    justifyContent: 'center',
     height: moderateScale(220),
-    alignItems: "center",
-    padding: moderateScale(15)
+    alignItems: 'center',
+    padding: moderateScale(15),
   },
   linearGradient: {
     position: 'absolute',
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: moderateScale(220),
-    opacity: 0.75
+    opacity: 0.75,
   },
 });
 

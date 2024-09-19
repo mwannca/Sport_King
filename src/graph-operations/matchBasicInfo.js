@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const GET_MATCH_BASIC_INFO = gql`
   query matchBasicInfo($jsWebToken: String!, $sport: String!, $matchId: [String!]) {

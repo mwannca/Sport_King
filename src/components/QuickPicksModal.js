@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -10,20 +10,20 @@ import {
 import Modal from 'react-native-modal';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {moderateScale} from 'react-native-size-matters';
-import numeral from "numeral";
+import numeral from 'numeral';
 import {useMutation} from '@apollo/client';
 import { MAKE_BET } from '../graph-operations';
-import { gameType, betType } from "../config"
+import { gameType, betType } from '../config';
 import {useDispatch, useSelector} from 'react-redux';
-import { truncate } from "../utils";
+import { truncate } from '../utils';
 import { initUser, increaseTotalBetCountPersist } from '../redux/features/userSlice';
-import analytics from "@react-native-firebase/analytics";
+import analytics from '@react-native-firebase/analytics';
 
 
 const QuickPicksModal = ({ isVisible, close, info }) => {
 
   const [inputValue, onInputValueChange] = useState();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
@@ -39,23 +39,23 @@ const QuickPicksModal = ({ isVisible, close, info }) => {
       dispatch(increaseTotalBetCountPersist({ totalBetCount: user.totalBetCount + 1 }));
     },
     onError(error){
-      console.log("Error ", error);
+      console.log('Error ', error);
       // TODO: Handle Error
-    }
+    },
   });
 
   const handleDelete = async () => {
-    onInputValueChange("");
+    onInputValueChange('');
     await analytics().logEvent('click_on_reset_bet_input');
   };
 
   const onChangeText = (text) => {
     onInputValueChange(text.replace(/[^0-9]/g, ''));
     // console.log(parseFloat(text), user.coins);
-    if(parseFloat(text) > user.coins){
-      return setError("Balance insuffisant");
+    if (parseFloat(text) > user.coins){
+      return setError('Balance insuffisant');
     }
-    setError("");
+    setError('');
   };
 
   const handleMakeBet = async () => {
@@ -71,9 +71,9 @@ const QuickPicksModal = ({ isVisible, close, info }) => {
         teams: `${info.homeName} - ${info.awayName}`,
         pickName: `${info.pick.name}`,
         spread: parseFloat(info.pick.spread),
-        total: parseFloat(info.pick.total)
-      }
-    })
+        total: parseFloat(info.pick.total),
+      },
+    });
     await analytics().logEvent('click_on_make_bet', {
       gameId: info.matchId,
     });
@@ -93,16 +93,16 @@ const QuickPicksModal = ({ isVisible, close, info }) => {
             <TouchableOpacity
               onPress={() => close(false)}
               hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
-              style={{ position: "absolute", right: moderateScale(10)}}>
+              style={{ position: 'absolute', right: moderateScale(10)}}>
               <AntDesign name="closecircle" size={20} color="#B3B3B6" />
             </TouchableOpacity>
           </View>
           <View style={styles.modalContent}>
             <View>
-              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <View>
-                  <Text style={styles.versusText}>{`${truncate(info.homeName + " - " + info.awayName, moderateScale(45))}`}</Text>
-                  <Text style={styles.betCategoryText}>{`${info.type}: ${info.pick.name} ${info.pick.spread? `(${info.pick.spread})` : ""}`}</Text>
+                  <Text style={styles.versusText}>{`${truncate(info.homeName + ' - ' + info.awayName, moderateScale(45))}`}</Text>
+                  <Text style={styles.betCategoryText}>{`${info.type}: ${info.pick.name} ${info.pick.spread ? `(${info.pick.spread})` : ''}`}</Text>
                 </View>
                 <Text style={styles.oddText}>{info.odd}</Text>
               </View>
@@ -111,26 +111,26 @@ const QuickPicksModal = ({ isVisible, close, info }) => {
                   style={styles.inputStyle}
                   value={inputValue}
                   onChangeText={onChangeText}
-                  textAlign={"right"}
-                  placeholder={"0"}
-                  placeholderTextColor={"white"}
-                  keyboardType='numeric'
+                  textAlign={'right'}
+                  placeholder={'0'}
+                  placeholderTextColor={'white'}
+                  keyboardType="numeric"
                   autoFocus
                 />
               </View>
-              { error? <Text style={styles.errorText}>{error}</Text> : null }
-              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-                <TouchableOpacity onPress={handleDelete} style={{ flexDirection: "row", alignItems: "center", fontSize: moderateScale(16)}}>
-                  <Text style={{ color: "#fff", marginRight: moderateScale(5)}}>Delete</Text>
-                  <AntDesign name="close" size={moderateScale(16)} color={"#fff"} />
+              { error ? <Text style={styles.errorText}>{error}</Text> : null }
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                <TouchableOpacity onPress={handleDelete} style={{ flexDirection: 'row', alignItems: 'center', fontSize: moderateScale(16)}}>
+                  <Text style={{ color: '#fff', marginRight: moderateScale(5)}}>Delete</Text>
+                  <AntDesign name="close" size={moderateScale(16)} color={'#fff'} />
                 </TouchableOpacity>
                 <View>
-                  <Text style={{ opacity: 0.7, color: "#fff", textDecorationLine: 'underline' }}>Amount:  {numeral(inputValue * info.odd).format("0,0[.]00 ")}Ƀ</Text>
+                  <Text style={{ opacity: 0.7, color: '#fff', textDecorationLine: 'underline' }}>Amount:  {numeral(inputValue * info.odd).format('0,0[.]00 ')}Ƀ</Text>
                 </View>
               </View>
               <TouchableOpacity disabled={loading || error} onPress={handleMakeBet} style={styles.placeBetButton}>
                 { loading && <ActivityIndicator size="large" color="#fff"/> }
-                { !loading && <Text style={{ fontFamily: "OpenSans-Bold", color: "#fff", fontSize: moderateScale(16)}}>Confirm</Text> }
+                { !loading && <Text style={{ fontFamily: 'OpenSans-Bold', color: '#fff', fontSize: moderateScale(16)}}>Confirm</Text> }
               </TouchableOpacity>
             </View>
           </View>
@@ -145,76 +145,76 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: "center",
+    alignSelf: 'center',
     borderRadius: 5,
     borderColor: 'rgba(0, 0, 0, 0.1)',
-    width: "95%"
+    width: '95%',
   },
   versusText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: moderateScale(14),
-    marginTop: moderateScale(15)
+    marginTop: moderateScale(15),
   },
   betCategoryText: {
-    color: "#fff",
-    opacity: 0.8
+    color: '#fff',
+    opacity: 0.8,
   },
   oddText: {
-    color: "#0BD664",
-    fontFamily: "OpenSans-Bold"
+    color: '#0BD664',
+    fontFamily: 'OpenSans-Bold',
   },
   modalContent: {
-    backgroundColor: "#140A35",
+    backgroundColor: '#140A35',
     padding: moderateScale(5),
     paddingHorizontal: moderateScale(10),
-    width: "100%"
+    width: '100%',
   },
   modalContainer: {
     justifyContent: 'center', // "flex-end"
     margin: 0,
   },
   modalHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
     padding: moderateScale(5),
-    backgroundColor: "#1A255C"
+    backgroundColor: '#1A255C',
   },
   modalTextTitle: {
-    fontFamily: "OpenSans-Bold",
+    fontFamily: 'OpenSans-Bold',
     fontSize: moderateScale(16),
-    color: "#fff"
+    color: '#fff',
   },
   inputContainer: {
-    width: "100%",
+    width: '100%',
     height: moderateScale(35),
-    backgroundColor: "#1A255C",
-    borderRadius: moderateScale(15),
-    marginVertical: moderateScale(15),
-    paddingHorizontal: moderateScale(10)
-  },
-  inputStyle: {
-    flex: 1,
-    fontFamily: "OpenSans",
-    fontSize: moderateScale(14),
-    textAlign: "right",
-    color: "#fff"
-  },
-  placeBetButton: {
-    width: "100%",
-    height: moderateScale(35),
-    backgroundColor: "#0BD664",
+    backgroundColor: '#1A255C',
     borderRadius: moderateScale(15),
     marginVertical: moderateScale(15),
     paddingHorizontal: moderateScale(10),
-    alignItems: "center",
-    justifyContent: "center"
+  },
+  inputStyle: {
+    flex: 1,
+    fontFamily: 'OpenSans',
+    fontSize: moderateScale(14),
+    textAlign: 'right',
+    color: '#fff',
+  },
+  placeBetButton: {
+    width: '100%',
+    height: moderateScale(35),
+    backgroundColor: '#0BD664',
+    borderRadius: moderateScale(15),
+    marginVertical: moderateScale(15),
+    paddingHorizontal: moderateScale(10),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   errorText: {
-    color: "red",
+    color: 'red',
     fontSize: moderateScale(14),
-  }
+  },
 });
 
 export default QuickPicksModal;

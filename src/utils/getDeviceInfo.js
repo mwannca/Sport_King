@@ -1,4 +1,4 @@
-import DeviceInfo from "react-native-device-info";
+import DeviceInfo from 'react-native-device-info';
 
 export const getDeviceInfo = async () => {
 
@@ -14,7 +14,7 @@ export const getDeviceInfo = async () => {
     codeName: await DeviceInfo.getCodename(),
     display: await DeviceInfo.getDisplay(),
     name: await DeviceInfo.getDeviceName(),
-    token: isEmulator? "Emulator" : await DeviceInfo.getDeviceToken(),
+    token: isEmulator ? 'Emulator' : await DeviceInfo.getDeviceToken(),
     appFirstInstall: (await DeviceInfo.getFirstInstallTime()).toString(),
     freeStorage: (await DeviceInfo.getFreeDiskStorage()).toString(),
     hardward: await DeviceInfo.getHardware(),
@@ -24,6 +24,6 @@ export const getDeviceInfo = async () => {
     buildId: await DeviceInfo.getBuildId(),
     capacity: (await DeviceInfo.getTotalDiskCapacity()).toString(),
     islocationEnabled: await DeviceInfo.isLocationEnabled(),
-  }
+  };
   return info;
-}
+};
